@@ -1,0 +1,4 @@
+%h1= "Welcome to #{Settings.app_name}"
+= form_tag tweet_path do
+  = text_area_tag :text
+  = submit_tag 'ツイートする'
