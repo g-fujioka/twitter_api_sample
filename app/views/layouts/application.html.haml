@@ -11,11 +11,12 @@
 
     - if signed_in?
       = render partial: '/layouts/user_icon', locals: { user: current_user, size: "18x18", klass: "margin_minus2" }
-      = link_to "Top",    root_path
+      = link_to "Top", root_path
+      = link_to "MyTweets", top_get_path
       = link_to "Logout", logout_path
     - else
       Login:
-      = link_to 'Twitter',  '/auth/twitter'
+      = link_to 'Twitter', '/auth/twitter'
 
 
     = simple_format(flash[:notice], style: "color: green;") if flash[:notice].present?
@@ -26,5 +27,7 @@
     %br/
     %br/
 
-    %center
-      Developed by YOUR_NAME
+    %left
+    %a#twitter-share-button{href: "https://twitter.com/intent/tweet"}Tweet
+    
+    Developed by g-fujioka
