@@ -9,8 +9,11 @@ Rails.application.routes.draw do
   # tweet
   post '/top/tweet' => 'top#tweet', as: :tweet
 
-  #TL Get
+  # My TL
   get '/top/get', to: 'top#get'
+
+  #Follow Check
+  post '/follow_check', to: 'top#follow_check', as: :follow_check
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

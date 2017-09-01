@@ -1,27 +1,37 @@
 class TopController < ApplicationController
   skip_before_action :authenticate
-  before_action :client, only: [:tweet, :get, :sample]
 
   def index
   end
 
   def tweet
     # Twitter投稿
-    @client.update(params[:text])
+    client.update(params[:text])
     redirect_to root_path, notice: 'ツイートしました！'
   end
 
   def get
     @tweets = []
-    @client.home_timeline(:count => 200).each do |tweet|
+    client.home_timeline(:count => 200).each do |tweet|
       @tweets << tweet
     end
+  end
+
+  def follow_check
+    @follows = client.friendships(params[:name])
+    unless @follows.blank?
+      flash[:success] = 'フォローしています！'
+      redirect_to root_url
+      return
+    end
+    flash[:notice] = 'フォローしていません'
+    redirect_to root_url
   end
 
   private
 
   def client
-    @client = Twitter::REST::Client.new do |config|
+    Twitter::REST::Client.new do |config|
       # applicationの設定
       config.consumer_key         = Settings.twitter_key
       config.consumer_secret      = Settings.twitter_secret
