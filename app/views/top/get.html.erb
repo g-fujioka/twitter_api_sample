@@ -3,11 +3,18 @@
 
   <%= link_to '更新', top_get_path %>
 
-  <table class="table table-striped">
-    <% @tweets.each do |tweet| %>
+  <div class="row">
+    <table class="table table-striped">
       <tr>
-        <td><%= link_to tweet.text, tweet.url.to_s %>
+        <td>ユーザー名</td><td>ツイート内容</td><td>投稿日</td>
       </tr>
-    <% end %>
-  </table>
+      <% @tweets.each do |tweet| %>
+        <tr>
+          <td class="col-md-2"><%= tweet.user.name %><%= render partial: '/layouts/other_user_icon', locals: {user: tweet.user, size: "24x24", klass: "margin_minus2" } %></td>
+          <td class="col-md-8"><%= link_to tweet.text, tweet.url.to_s %></td>
+          <td class="col-md-2"><%= tweet.created_at.to_date %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
 </div>
