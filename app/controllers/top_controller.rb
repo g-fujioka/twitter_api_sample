@@ -12,20 +12,18 @@ class TopController < ApplicationController
 
   def get
     @tweets = []
-    client.home_timeline(:count => 200).each do |tweet|
+    client.home_timeline(count: 200).each do |tweet|
       @tweets << tweet
     end
+    @tweets = Kaminari.paginate_array(@tweets).page(params[:page]).per(30)
   end
 
   def follow_check
     @follows = client.friendships(params[:name])
     unless @follows.blank?
       flash.now[:success] = 'フォローしています！'
-      respond_to do |format|
-        format.html { redirect_to root_url }
-        format.js
-      end
-    return
+      redirect_to root_url
+      return
     end
     flash.now[:notice] = 'フォローしていません'
     redirect_to root_url
