@@ -21,11 +21,11 @@ class TopController < ApplicationController
   def follow_check
     @follows = client.friendships(params[:name])
     unless @follows.blank?
-      flash.now[:success] = 'フォローしています！'
+      flash[:success] = 'フォローしています！'
       redirect_to root_url
       return
     end
-    flash.now[:notice] = 'フォローしていません'
+    flash[:notice] = 'フォローしていません'
     redirect_to root_url
   end
 
