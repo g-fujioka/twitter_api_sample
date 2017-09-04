@@ -1,0 +1,13 @@
+<div class="container-fluid">
+  <h1>My TimeLine</h1>
+
+  <%= link_to '更新', top_get_path %>
+
+  <table class="table table-striped">
+    <% @tweets.each do |tweet| %>
+      <tr>
+        <td><%= link_to tweet.text, tweet.url.to_s %>
+      </tr>
+    <% end %>
+  </table>
+</div>

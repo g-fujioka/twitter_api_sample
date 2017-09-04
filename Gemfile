@@ -35,7 +35,6 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'twitter'
 gem 'minimum-omniauth-scaffold'
-gem 'haml'
 gem 'therubyracer'
 gem 'less-rails', git: 'https://github.com/MustafaZain/less-rails'
 gem 'twitter-bootstrap-rails'
