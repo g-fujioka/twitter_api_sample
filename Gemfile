@@ -50,7 +50,10 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.6'
   gem 'simplecov'
   gem 'factory_girl_rails'
-
+  gem 'pry-rails'
+  gem 'pry-doc'
+  gem 'pry-byebug'
+  gem 'pry-stack_explorer'
 end
 
 group :development do
