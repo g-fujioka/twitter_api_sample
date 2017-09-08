@@ -5,7 +5,49 @@
     <%= submit_tag 'ツイートする' %>
 <% end %>
 
+<%= form_tag(search_path) do %>
+    <%= text_field_tag :text %>
+    <%= submit_tag '検索する' %>
+<% end %>
+
 <%= form_tag(follow_check_path) do %>
     <%= text_field :name,'', placeholder: 'ユーザー名を入力' %>
     <%= submit_tag 'フォローチェック' %>
 <% end %>
+
+<% unless @search_tweets.blank? %>
+    <div class="row">
+      <table class="table table-striped">
+        <tr>
+          <td></td><td>ユーザー</td><td>ツイート内容</td><td>投稿日</td>
+        </tr>
+        <% @search_tweets.each.with_index(1) do|tweet, i| %>
+            <tr>
+              <td class="col-md-1"><%= i %>
+              <td class="col-md-2"><%= link_to tweet.user.name %><%= render partial: '/layouts/other_user_icon', locals: {user: tweet.user, size: "20x20", klass: "margin_minus2" } %></td>
+              <td class="col-md-7"><%= link_to tweet.text, tweet.url.to_s %></td>
+              <td class="col-md-2"><%= tweet.created_at.to_date %></td>
+            </tr>
+        <% end %>
+      </table>
+      <%= paginate(@search_tweets) %>
+      <%= "#{@search_tweets.count}件取得しました。" %>
+    </div>
+<% end %>
+
+<% unless @follows.blank? %>
+  <div class="row">
+    <table class="table table-striped">
+      <tr>
+        <td></td><td>フォローユーザー</td>
+      </tr>
+      <% @follows.each.with_index(1) do|follow, i| %>
+         <tr>
+            <td class="col-md-1"><%= i %>
+            <td class="col-md-10"><%= link_to follow.name, follow.website %></td>
+         </tr>
+      <% end %>
+    </table>
+  </div>
+<% end %>
+
