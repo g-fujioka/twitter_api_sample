@@ -1,3 +1,16 @@
+# == Route Map
+#
+#       Prefix Verb URI Pattern                        Controller#Action
+#         root GET  /                                  top#index
+#              GET  /auth/:provider/callback(.:format) sessions#callback
+# auth_failure GET  /auth/failure(.:format)            sessions#failure
+#       logout GET  /logout(.:format)                  sessions#destroy
+#        tweet POST /top/tweet(.:format)               top#tweet
+#      top_get GET  /top/get(.:format)                 top#get
+# follow_check POST /follow_check(.:format)            top#follow_check
+#       search POST /search(.:format)                  top#search
+# 
+
 Rails.application.routes.draw do
   root to: 'top#index'
 

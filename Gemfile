@@ -49,7 +49,6 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'rspec-rails', '~> 3.6'
   gem 'simplecov'
-  gem 'factory_girl_rails'
   gem 'pry-rails'
   gem 'pry-doc'
   gem 'pry-byebug'
@@ -67,11 +66,13 @@ group :development do
   gem 'better_errors'
   # better_errorsの画面上にirb/pry(PERL)を表示する
   gem 'binding_of_caller'
+  gem 'annotate'
 end
 
 group :test do
   gem 'turnip'
   gem 'database_rewinder'
+  gem 'factory_girl_rails'
 
 end
 

@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: authentications
+#
+#  id         :integer          not null, primary key
+#  user_id    :integer
+#  provider   :string
+#  uid        :string
+#  name       :string
+#  nickname   :string
+#  image      :string
+#  email      :string
+#  location   :string
+#  gender     :string
+#  token      :string
+#  secret     :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class Authentication < ApplicationRecord
   belongs_to :user, optional: true
 

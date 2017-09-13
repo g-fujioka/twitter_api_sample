@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                  :integer          not null, primary key
+#  name                :string
+#  image               :string
+#  email               :string
+#  admin_flag          :boolean          default(FALSE), not null
+#  last_login_provider :string
+#  last_login_at       :datetime
+#  user_agent          :text
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#
+
 class User < ApplicationRecord
   has_many :authentications
 
