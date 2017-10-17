@@ -26,13 +26,12 @@ class TopController < ApplicationController
   end
 
   def search
-    @search_tweets = client.search(params[:text], count: 150, result_type: 'recent').take(150)
+    @search_tweets = Kaminari.paginate_array(client.search(params[:text], count: 150, result_type: 'recent', lang: 'ja', exclude: 'retweets')).page(params[:page]).per(30)
     if @search_tweets.blank?
       flash[:notice] = 'ツイートはありませんでした'
       redirect_to root_url
       return
     end
-    @search_tweets = Kaminari.paginate_array(@search_tweets).page(params[:page]).per(30)
     render 'top/index'
   end
 
