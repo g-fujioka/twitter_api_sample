@@ -10,9 +10,9 @@
     <%= submit_tag '検索する' %>
 <% end %>
 
-<%= form_tag(follow_check_path) do %>
+<%= form_tag(follower_check_path) do %>
     <%= text_field :name,'', placeholder: 'ユーザー名を入力' %>
-    <%= submit_tag 'フォローチェック' %>
+    <%= submit_tag 'フォロワーチェック' %>
 <% end %>
 
 <% unless @search_tweets.blank? %>
@@ -34,13 +34,13 @@
     </div>
 <% end %>
 
-<% unless @follows.blank? %>
+<% unless @followers.blank? %>
   <div class="row">
     <table class="table table-striped">
       <tr>
-        <td></td><td>フォローユーザー</td>
+        <td></td><td>フォロワーユーザー</td>
       </tr>
-      <% @follows.each.with_index(1) do|follow, i| %>
+      <% @followers.each.with_index(1) do|follow, i| %>
          <tr>
             <td class="col-md-1"><%= i %>
             <td class="col-md-10"><%= link_to follow.name, follow.website %></td>
