@@ -32,7 +32,10 @@ class TopController < ApplicationController
       redirect_to root_url
       return
     end
-    render 'top/index'
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   private

@@ -39,6 +39,8 @@ gem 'therubyracer'
 gem 'less-rails', git: 'https://github.com/MustafaZain/less-rails'
 gem 'twitter-bootstrap-rails'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
+
 gem 'kaminari'
 gem 'rest-client'
 
