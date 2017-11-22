@@ -70,6 +70,8 @@ group :development do
   # better_errorsの画面上にirb/pry(PERL)を表示する
   gem 'binding_of_caller'
   gem 'annotate'
+  # chrome dev tool
+  gem 'meta_request'
 end
 
 group :test do
