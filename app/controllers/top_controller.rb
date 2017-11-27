@@ -17,12 +17,15 @@ class TopController < ApplicationController
   def follower_check
     @follower = client.followers ([screen_name: params[:name]])
     unless @follower.attrs[:user].blank?
-      flash.now[:success] = 'フォローしています！'
-      render 'top/index'
+      flash[:notice] = 'フォローしていません'
+      redirect_to root_url
       return
     end
-    flash[:notice] = 'フォローしていません'
-    redirect_to root_url
+    respond_to do |format|
+      binding.pry
+      format.html
+      format.js
+    end
   end
 
   def search

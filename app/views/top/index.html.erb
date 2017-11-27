@@ -10,11 +10,13 @@
     <%= submit_tag '検索する' %>
 <% end %>
 
-<%= form_tag(follower_check_path) do %>
-    <%= text_field :name,'', placeholder: 'ユーザー名を入力' %>
+<%= form_tag({action: :follower_check}, method: :get, remote: true, id: :search_form) do %>
+    <%= text_field_tag :name,'', placeholder: 'ユーザー名を入力' %>
     <%= submit_tag 'フォロワーチェック' %>
 <% end %>
 
 <div id="search_table">
+</div>
+<div id="follower_table">
 </div>
 

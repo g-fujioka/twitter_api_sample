@@ -26,7 +26,8 @@ Rails.application.routes.draw do
   get '/top/get', to: 'top#get'
 
   # Follower Check
-  post '/follower_check', to: 'top#follower_check', as: :follower_check
+  get '/follower_check', to: 'top#follower_check'
+  post '/follower_check', to: 'top#follower_check'
 
   # tweets search
   get '/search', to: 'top#search'
