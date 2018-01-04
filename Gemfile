@@ -39,8 +39,11 @@ gem 'therubyracer'
 gem 'less-rails', git: 'https://github.com/MustafaZain/less-rails'
 gem 'twitter-bootstrap-rails'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
+
 gem 'kaminari'
 gem 'rest-client'
+gem 'social-share-button'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -68,6 +71,8 @@ group :development do
   # better_errorsの画面上にirb/pry(PERL)を表示する
   gem 'binding_of_caller'
   gem 'annotate'
+  # chrome dev tool
+  gem 'meta_request'
 end
 
 group :test do

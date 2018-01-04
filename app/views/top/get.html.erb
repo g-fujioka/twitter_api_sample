@@ -1,6 +1,12 @@
 <div class="container-fluid">
   <h1>My TimeLine</h1>
+  <script src="clock.js.coffee"></script>
+  <span id="clock_year"></span>
+  <span id="clock_date"></span>
+  <span id="clock_time"></span>
+  <span id="clock_weeks"></span>
 
+  <br>
   <%= link_to '更新', top_get_path %>
 
   <%= paginate(@tweets) %>

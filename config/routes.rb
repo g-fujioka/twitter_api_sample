@@ -25,10 +25,8 @@ Rails.application.routes.draw do
   # My TL
   get '/top/get', to: 'top#get'
 
-  # Follower Check
-  post '/follower_check', to: 'top#follower_check', as: :follower_check
-
   # tweets search
+  get '/search', to: 'top#search'
   post '/search', to: 'top#search'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
