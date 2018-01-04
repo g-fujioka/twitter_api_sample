@@ -14,19 +14,6 @@ class TopController < ApplicationController
     @tweets = Kaminari.paginate_array(client.home_timeline(count: 200)).page(params[:page]).per(30)
   end
 
-  def follower_check
-    @follower = client.followers ([screen_name: params[:name]])
-    unless @follower.attrs[:user].blank?
-      flash[:notice] = 'フォローしていません'
-      redirect_to root_url
-      return
-    end
-    respond_to do |format|
-      format.html
-      format.js
-    end
-  end
-
   def search
     @search_tweets = client.search(params[:text], result_type: 'recent', lang: 'ja', exclude: 'retweets').take(20)
     if @search_tweets.blank?
