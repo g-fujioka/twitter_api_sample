@@ -27,6 +27,15 @@ class TopController < ApplicationController
     end
   end
 
+  def retweet
+    client.retweet(params[:id])
+    flash[:notice] = 'RTしました'
+    render 'index'
+  rescue => e
+    flash[:notice] = e
+    render 'index'
+  end
+
   private
 
   def client

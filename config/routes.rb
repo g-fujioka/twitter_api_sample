@@ -25,6 +25,9 @@ Rails.application.routes.draw do
   # My TL
   get '/top/get', to: 'top#get'
 
+  # RT
+  get '/retweet', to: 'top#retweet'
+
   # tweets search
   get '/search', to: 'top#search'
   post '/search', to: 'top#search'
