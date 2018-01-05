@@ -2,6 +2,11 @@ class TopController < ApplicationController
   skip_before_action :authenticate
 
   def index
+    begin
+      @tweets = Kaminari.paginate_array(client.home_timeline(count: 200)).page(params[:page]).per(30)
+    rescue
+      flash[:notice] = 'ログインしてください'
+    end
   end
 
   def tweet
@@ -11,14 +16,16 @@ class TopController < ApplicationController
   end
 
   def get
-    @tweets = Kaminari.paginate_array(client.home_timeline(count: 200)).page(params[:page]).per(30)
+    @my_tweets = Kaminari.paginate_array(client.user_timeline(current_user.name, count: 200)).page(params[:page]).per(30)
   end
 
   def search
-    @search_tweets = client.search(params[:text], result_type: 'recent', lang: 'ja', exclude: 'retweets').take(20)
+  end
+
+  def search_ajax
+    @search_tweets = client.search(params[:text], result_type: 'popular', lang: 'ja', exclude: 'retweets', count: 30)
     if @search_tweets.blank?
-      flash[:notice] = 'ツイートはありませんでした'
-      redirect_to root_url
+      redirect_to root_url, flash: {notice: 'ツイートはありませんでした'}
       return
     end
     respond_to do |format|
@@ -29,11 +36,16 @@ class TopController < ApplicationController
 
   def retweet
     client.retweet(params[:id])
-    flash[:notice] = 'RTしました'
-    render 'index'
-  rescue => e
-    flash[:notice] = e
-    render 'index'
+    redirect_to top_search_path, flash: {notice: 'RTしました'}
+  rescue
+    redirect_to top_search_path, flash: {notice: '既にリツイートしています'}
+  end
+
+  def destroy
+    client.destroy(params[:id])
+    redirect_to top_get_path, flash: {notice: '削除しました'}
+  rescue
+    redirect_to top_get_path, flash: {notice: '削除できませんでした'}
   end
 
   private

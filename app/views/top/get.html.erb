@@ -1,3 +1,5 @@
+<h1><%= "My Tweet" %></h1>
+
 <div class="container-fluid">
   <h1>My TimeLine</h1>
   <script src="clock.js.coffee"></script>
@@ -9,18 +11,18 @@
   <br>
   <%= link_to '更新', top_get_path %>
 
-  <%= paginate(@tweets) %>
+  <%= paginate(@my_tweets) %>
 
   <div class="row">
     <table class="table table-striped">
       <tr>
-        <td>ユーザー名</td><td>ツイート内容</td><td>投稿日</td>
+        <td>ツイート内容</td><td>投稿日</td>
       </tr>
-      <% @tweets.each do |tweet| %>
+      <% @my_tweets.each do |tweet| %>
         <tr>
-          <td class="col-md-2"><%= tweet.user.name %><%= render partial: '/layouts/other_user_icon', locals: {user: tweet.user, size: "24x24", klass: "margin_minus2" } %></td>
-          <td class="col-md-8"><%= link_to tweet.text, tweet.url.to_s %></td>
+          <td class="col-md-10"><%= link_to tweet.text, tweet.url.to_s %></td>
           <td class="col-md-2"><%= tweet.created_at.in_time_zone('Tokyo').strftime('%Y年%m月%d日 %H:%M:%S') %></td>
+          <!--<td class="col-md-1"><%= link_to '削除', top_destroy_path, class: 'btn', id: tweet.id %></td>-->
         </tr>
       <% end %>
     </table>

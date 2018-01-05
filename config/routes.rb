@@ -26,11 +26,14 @@ Rails.application.routes.draw do
   get '/top/get', to: 'top#get'
 
   # RT
-  get '/retweet', to: 'top#retweet'
+  get 'top/retweet', to: 'top#retweet'
+
+  #delete
+  get 'top/destroy', to: 'top#destroy'
 
   # tweets search
-  get '/search', to: 'top#search'
-  post '/search', to: 'top#search'
+  get '/top/search', to: 'top#search'
+  post '/top/search_ajax', to: 'top#search_ajax'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
