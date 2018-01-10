@@ -1,14 +1,39 @@
 <h1><%= "Welcome to #{Settings.app_name}" %></h1>
 
+<h1>My TimeLine</h1>
+<script src="clock.js.coffee"></script>
+<span id="clock_year"></span>
+<span id="clock_date"></span>
+<span id="clock_time"></span>
+<span id="clock_weeks"></span>
+
+<br>
+
 <%= form_tag(tweet_path) do %>
     <%= text_area_tag :text %>
     <%= submit_tag 'ツイートする' %>
 <% end %>
 
-<%= form_tag({action: :search}, method: :get, remote: true, id: :search_form) do %>
-    <%= text_field_tag :text %>
-    <%= submit_tag '検索する' %>
-<% end %>
+<%if @tweets.present? %>
+  <div class="container-fluid">
 
-<div id="search_table">
-</div>
+    <%= link_to '更新', root_path %>
+
+    <%= paginate(@tweets) %>
+
+    <div class="row">
+      <table class="table table-striped">
+        <tr>
+          <td>ユーザー名</td><td>ツイート内容</td><td>投稿日</td>
+        </tr>
+        <% @tweets.each do |tweet| %>
+            <tr>
+              <td class="col-md-2"><%= tweet.user.name %><%= render partial: '/layouts/other_user_icon', locals: {user: tweet.user, size: "24x24", klass: "margin_minus2" } %></td>
+              <td class="col-md-8"><%= link_to tweet.text, tweet.url.to_s %></td>
+              <td class="col-md-2"><%= tweet.created_at.in_time_zone('Tokyo').strftime('%Y年%m月%d日 %H:%M:%S') %></td>
+            </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+<% end %>
