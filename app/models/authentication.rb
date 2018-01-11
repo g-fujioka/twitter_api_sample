@@ -43,6 +43,8 @@ class Authentication < ApplicationRecord
     self.email    = auth['info']['email']    if auth['info']['email'].present?
     self.gender   = gender                   if gender.present?
     self.location = location                 if location.present?
+    self.token  = auth['credentials']['token'] if auth['credentials']['token'].present?
+    self.secret = auth['credentials']['secret'] if auth['credentials']['secret'].present?
     self.save!
   end
 
