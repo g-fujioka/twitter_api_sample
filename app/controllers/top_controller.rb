@@ -52,17 +52,16 @@ class TopController < ApplicationController
   end
 
   def stream_ajax
-    # 現状ターミナルに垂れ流し
-    # @stream_text = []
+    count = 0
     stream_client.sample do |object|
-    #   @stream_text << object.text if object.is_a?(Twitter::Tweet)
-    #   if @stream_text.size > 100
-    #     respond_to do |format|
-    #       format.html
-    #       format.js
-    #     end
-    #   end
-      p object.text if object.is_a?(Twitter::Tweet)
+      if object.is_a?(Twitter::Tweet)
+        puts object.text
+        count += 1
+        if count > 300
+          redirect_to top_stream_path
+          return
+        end
+      end
     end
   end
 
