@@ -2,11 +2,9 @@ class TopController < ApplicationController
   skip_before_action :authenticate
 
   def index
-    begin
-      @tweets = Kaminari.paginate_array(client.home_timeline(count: 200)).page(params[:page]).per(30)
-    rescue
-      flash[:notice] = 'ログインしてください'
-    end
+    @tweets = Kaminari.paginate_array(client.home_timeline(count: 200)).page(params[:page]).per(30)
+  rescue
+    flash[:notice] = 'ログインしてください'
   end
 
   def tweet
