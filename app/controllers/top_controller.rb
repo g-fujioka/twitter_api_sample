@@ -21,7 +21,7 @@ class TopController < ApplicationController
   end
 
   def search_ajax
-    @search_tweets = client.search(params[:text], result_type: 'popular', lang: 'ja', exclude: 'retweets', count: 30)
+    @search_tweets = client.search(params[:text], result_type: params[:result_type], lang: 'ja', exclude: 'retweets', count: 30)
     if @search_tweets.blank?
       redirect_to root_url, flash: {notice: 'ツイートはありませんでした'}
       return

@@ -2,6 +2,7 @@
 
 <%= form_tag({action: :search_ajax}, method: :post, remote: true, id: :search_form) do %>
     <%= text_field_tag :text %>
+    <%= select_tag :result_type, options_for_select([['人気順', 'popular'], ['最新順', 'recent'], ['最新人気順', 'mixed']]) %>
     <%= submit_tag '検索する' %>
 <% end %>
 
