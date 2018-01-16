@@ -1,6 +1,8 @@
 <h1>Streamテスト</h1>
 
-<%= button_to 'START', remote: true, action: 'stream_ajax', class: 'btn btn-primary' %>
-
+<%= form_tag({action: :stream_ajax}, method: :post, remote: true, id: :stream_form) do %>
+  <%= text_field_tag :text %>
+  <%= submit_tag 'START' %>
+<% end %>
 <div id="stream_table">
 </div>

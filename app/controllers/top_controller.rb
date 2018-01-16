@@ -51,13 +51,26 @@ class TopController < ApplicationController
 
   def stream_ajax
     count = 0
-    stream_client.sample do |object|
-      if object.is_a?(Twitter::Tweet)
-        puts object.text
-        count += 1
-        if count > 300
-          redirect_to top_stream_path
-          return
+    if params[:text].present?
+      stream_client.filter(track: params[:text]) do |object|
+        if object.is_a?(Twitter::Tweet)
+          puts object.text
+          count += 1
+          if count > 10
+            redirect_to top_stream_path
+            return
+          end
+        end
+      end
+    else
+      stream_client.sample do |object|
+        if object.is_a?(Twitter::Tweet)
+          puts object.text
+          count += 1
+          if count > 300
+            redirect_to top_stream_path
+            return
+          end
         end
       end
     end
