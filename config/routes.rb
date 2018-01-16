@@ -35,5 +35,9 @@ Rails.application.routes.draw do
   get '/top/search', to: 'top#search'
   post '/top/search_ajax', to: 'top#search_ajax'
 
+  #tweet stream
+  get 'top/stream', to: 'top#stream'
+  post '/top/stream_ajax', to: 'top#stream_ajax'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
