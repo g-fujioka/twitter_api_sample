@@ -3,3 +3,6 @@ app_name: 'Twitter Sample API'
 twitter_page:  'https://twitter.com/'
 facebook_page: 'https://www.facebook.com/'
 github_page:   'https://github.com/'
+
+twitter_key:    <%= ENV['TWITTER_KEY'] %>
+twitter_secret: <%= ENV['TWITTER_SECRET_KEY'] %>

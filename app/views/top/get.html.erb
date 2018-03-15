@@ -22,7 +22,7 @@
         <tr>
           <td class="col-md-10"><%= link_to tweet.text, tweet.url.to_s %></td>
           <td class="col-md-2"><%= tweet.created_at.in_time_zone('Tokyo').strftime('%Y年%m月%d日 %H:%M:%S') %></td>
-          <!--<td class="col-md-1"><%= link_to '削除', top_destroy_path, class: 'btn', id: tweet.id %></td>-->
+          <!--<td class="col-md-1"><%= link_to '削除', top_destroy_path, class: 'btn', tweet: tweet %></td>-->
         </tr>
       <% end %>
     </table>

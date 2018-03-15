@@ -23,8 +23,4 @@ test:
   min_messages: WARNING
 
 production:
-  adapter: postgresql
-  encoding: unicode
-  database: twitter_api_sample
-  username: gfujioka
-  host: localhost
+  url: <%= ENV['DATABASE_URL'] %>
