@@ -2,11 +2,9 @@ class TopController < ApplicationController
   skip_before_action :authenticate
 
   def index
-    begin
-      @tweets = Kaminari.paginate_array(client.home_timeline(count: 200)).page(params[:page]).per(30)
-    rescue
-      flash[:notice] = 'ログインしてください'
-    end
+    @tweets = Kaminari.paginate_array(client.home_timeline(count: 200)).page(params[:page]).per(30)
+  rescue
+    flash[:notice] = 'ログインしてください'
   end
 
   def tweet
@@ -23,7 +21,7 @@ class TopController < ApplicationController
   end
 
   def search_ajax
-    @search_tweets = client.search(params[:text], result_type: 'popular', lang: 'ja', exclude: 'retweets', count: 30)
+    @search_tweets = client.search(params[:text], result_type: params[:result_type], lang: 'ja', exclude: 'retweets', count: 30)
     if @search_tweets.blank?
       redirect_to root_url, flash: {notice: 'ツイートはありませんでした'}
       return
@@ -53,13 +51,26 @@ class TopController < ApplicationController
 
   def stream_ajax
     count = 0
-    stream_client.sample do |object|
-      if object.is_a?(Twitter::Tweet)
-        puts object.text
-        count += 1
-        if count > 300
-          redirect_to top_stream_path
-          return
+    if params[:text].present?
+      stream_client.filter(track: params[:text]) do |object|
+        if object.is_a?(Twitter::Tweet)
+          puts object.text
+          count += 1
+          if count > 10
+            redirect_to top_stream_path
+            return
+          end
+        end
+      end
+    else
+      stream_client.sample do |object|
+        if object.is_a?(Twitter::Tweet)
+          puts object.text
+          count += 1
+          if count > 300
+            redirect_to top_stream_path
+            return
+          end
         end
       end
     end
