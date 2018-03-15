@@ -1,4 +1,4 @@
-<h1><%= "ツイート検索" %></h1>
+<h1><%= "ツイート検索()" %></h1>
 
 <%= form_tag({action: :search_ajax}, method: :post, remote: true, id: :search_form) do %>
     <%= text_field_tag :text %>
